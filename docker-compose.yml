@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+    app:
+        build:
+            context: ./build
+            args:
+                - YATEVERSION=6.0.0-1
+        restart: unless-stopped
+        networks:
+            - net
+        ports:
+            - "5060-5061:5060-5061"
+        volumes:
+            - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+        cap_add:
+            - SYS_ADMIN
+
+networks:
+    net:
